@@ -28,12 +28,27 @@ Graph.prototype.printNodesData = function() {
 }
 
 /**
- * 
- * @param {GraphNode} origin 
+ *
+ * @param {GraphNode} origin
  * @param {GraphNode} destination
  */
 Graph.prototype.dfs = function(origin, destination) {
-  
+  let toVisit = []
+  let visited = new Set()
+  let current = origin
+  while (current) {
+    if (current === destination) {
+      return 'found connection :)'
+    }
+    visited.add(current)
+    current.edges.forEach((connection) => {
+      if (!visited.has(connection)) {
+        toVisit.push(connection)
+      }
+    })
+    current = toVisit.pop()
+  }
+  return 'no connection found :('
 }
 
 const lg = new Graph()
